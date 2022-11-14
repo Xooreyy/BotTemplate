@@ -11,14 +11,18 @@ import xyz.xorey.db.Models.User
 class DatabaseListener : ListenerAdapter() {
     override fun onMessageReceived(event: MessageReceivedEvent) {
         Guild.findOrCreateGuild(event.guild.id)
-        Member.findOrCreateMember(event.member?.id!!, event.guild.id)
-        User.findOrCreateUser(event.member?.id!!)
+        if (event.member?.user?.isBot == false) {
+            Member.findOrCreateMember(event.member?.id!!, event.guild.id)
+            User.findOrCreateUser(event.member?.id!!)
+        }
     }
 
     override fun onSlashCommandInteraction(event: SlashCommandInteractionEvent) {
         Guild.findOrCreateGuild(event.guild?.id!!)
-        Member.findOrCreateMember(event.member?.id!!, event.guild?.id!!)
-        User.findOrCreateUser(event.member?.id!!)
+        if (event.member?.user?.isBot == false) {
+            Member.findOrCreateMember(event.member?.id!!, event.guild!!.id)
+            User.findOrCreateUser(event.member?.id!!)
+        }
     }
 
     override fun onGuildJoin(event: GuildJoinEvent) {
