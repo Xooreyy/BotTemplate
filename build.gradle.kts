@@ -22,6 +22,7 @@ dependencies {
     //JDA
     implementation("net.dv8tion:JDA:5.0.0-alpha.21")
     implementation ("ch.qos.logback:logback-classic:1.2.11")
+    testImplementation("org.slf4j:slf4j-nop:2.0.3")
 
     //database
     implementation("org.mongodb:mongodb-driver:3.12.11")
