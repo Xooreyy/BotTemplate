@@ -1,10 +1,13 @@
 package xyz.xorey.Manager
 
+import ch.qos.logback.classic.Level
+import ch.qos.logback.classic.LoggerContext
 import xyz.xorey.Manager.RegisterManager.registerAll
 import xyz.xorey.Manager.RegisterManager.registerCommands
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.JDABuilder
 import net.dv8tion.jda.api.requests.GatewayIntent
+import org.slf4j.LoggerFactory
 import xyz.xorey.Handler.Command.CommandHandler
 import xyz.xorey.db.Communication.Database
 import java.io.BufferedReader
@@ -21,6 +24,14 @@ class Bot {
 
     init {
         instance = this
+
+        if (Config.loggingDisables) {
+            val mongodbLogger = LoggerFactory.getILoggerFactory() as LoggerContext
+            mongodbLogger.getLogger("org.mongodb.driver").level = Level.ERROR
+
+            val jdaLogger = LoggerFactory.getILoggerFactory() as LoggerContext
+            jdaLogger.getLogger("net.dv8tion.jda").level = Level.ERROR
+        }
 
         jda = JDABuilder.createDefault(Config.token)
             .enableIntents(GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MEMBERS)

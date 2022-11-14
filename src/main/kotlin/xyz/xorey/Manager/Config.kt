@@ -4,6 +4,7 @@ class Config {
     companion object {
         val config = this
 
+        val loggingDisables: Boolean = false
         val mainPackage = "xyz.xorey"
         val mongoUri = ""
         val prefix: String = "!"
