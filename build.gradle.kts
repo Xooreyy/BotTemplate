@@ -24,7 +24,7 @@ dependencies {
     implementation ("ch.qos.logback:logback-classic:1.2.11")
 
     //database
-    implementation("org.xerial:sqlite-jdbc:3.39.3.0")
+    implementation("org.mongodb:mongodb-driver:3.12.11")
 }
 
 tasks.test {
