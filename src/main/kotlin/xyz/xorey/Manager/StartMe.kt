@@ -7,10 +7,8 @@ import net.dv8tion.jda.api.JDABuilder
 import net.dv8tion.jda.api.requests.GatewayIntent
 import xyz.xorey.Handler.Command.CommandHandler
 import xyz.xorey.db.Communication.Database
-import xyz.xorey.db.Models.SQLManager
 import java.io.BufferedReader
 import java.io.InputStreamReader
-import java.util.*
 
 class Bot {
 
@@ -20,8 +18,6 @@ class Bot {
     }
 
     val jda: JDA
-
-    val properties = Properties()
 
     init {
         instance = this
@@ -36,8 +32,7 @@ class Bot {
 
         CommandHandler.registerMap()
         Database.connect()
-        SQLManager.createTables()
-        SQLManager.printTables()
+
         shutdown()
     }
 }
@@ -56,7 +51,6 @@ fun shutdown() {
         val input = reader.readLine()
         if (input == "shutdown") {
             log("Shutting down...")
-            Database.disconnect()
             Bot.instance.jda.shutdown()
             System.exit(0)
             break
