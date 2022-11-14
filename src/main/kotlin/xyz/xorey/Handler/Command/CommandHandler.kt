@@ -18,7 +18,7 @@ class CommandHandler {
         val commands: HashMap<String, Pair<Command, onCommand>> = HashMap<String, Pair<Command, onCommand>>()
 
         fun registerMap() {
-            val reflections = Reflections("xyz.xorey.Commands")
+            val reflections = Reflections("${Config.mainPackage}.Commands")
             for (clazz in reflections.getSubTypesOf(onCommand::class.java)) {
                 val Annontation: Command = clazz.getAnnotation(Command::class.java)
                 val Interface: onCommand = clazz.cast(clazz.newInstance())

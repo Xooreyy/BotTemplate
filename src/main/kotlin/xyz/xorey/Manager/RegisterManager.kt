@@ -17,7 +17,7 @@ object RegisterManager {
 
     @OptIn(ExperimentalTime::class)
     fun JDABuilder.registerAll() : JDABuilder {
-        val reflections = Reflections("xyz.xorey")
+        val reflections = Reflections(Config.mainPackage)
 
         // Registering both ListenerAdapters and EventListeners
         val listenerTime = measureTime {
@@ -41,8 +41,7 @@ object RegisterManager {
 
     @OptIn(ExperimentalTime::class)
     fun JDA.registerCommands(): JDA {
-        val reflections = Reflections("xyz.xorey")
-        val guildIds = Bot.instance.properties.getProperty("guilds", "").split(",").toTypedArray()
+        val reflections = Reflections(Config.mainPackage)
 
         // Registering commands
         val commandsTime = measureTime {
