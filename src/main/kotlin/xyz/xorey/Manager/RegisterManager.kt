@@ -31,10 +31,10 @@ object RegisterManager {
                 val listener = constructor.newInstance()
                 loadedClasses += clazz.simpleName to listener
                 addEventListeners(listener)
-                log("Registered listener: ${listener.javaClass.simpleName}")
+                Logger.info("Registered listener: ${listener.javaClass.simpleName}")
             }
         }
-        log("Registered listeners in $listenerTime")
+        Logger.info("Registered listeners in $listenerTime")
 
         return this
     }
@@ -55,7 +55,7 @@ object RegisterManager {
 
                     val command = constructor.newInstance()
                     loadedClasses += clazz.simpleName to command
-                    log("Registered command class: ${command.javaClass.simpleName}")
+                    Logger.info("Registered command class: ${command.javaClass.simpleName}")
                 }
 
                 val command = loadedClasses[clazz.simpleName]
@@ -66,18 +66,18 @@ object RegisterManager {
 
                 if(annotation.globalCommand) {
                     upsertCommand(data).queue()
-                    log("Registered global command: ${annotation.name}")
+                    Logger.info("Registered global command: ${annotation.name}")
                 } else {
                     for (guildID in annotation.guilds) {
                         getGuildById(guildID)?.let { guild ->
                             guild.upsertCommand(data).queue()
-                            log("Registered command: ${annotation.name} in guild: ${guild.name}")
+                            Logger.info("Registered command: ${annotation.name} in guild: ${guild.name}")
                         }
                     }
                 }
             }
         }
-        log("Registered commands in $commandsTime")
+        Logger.info("Registered commands in $commandsTime")
 
         return this
     }

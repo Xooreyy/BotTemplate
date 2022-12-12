@@ -8,7 +8,7 @@ import org.reflections8.Reflections
 import xyz.xorey.Handler.Interfaces.Command
 import xyz.xorey.Manager.Bot
 import xyz.xorey.Manager.Config
-import xyz.xorey.Manager.log
+import xyz.xorey.Manager.Logger
 import java.util.*
 import java.util.regex.Pattern
 
@@ -23,7 +23,7 @@ class CommandHandler {
                 val Annontation: Command = clazz.getAnnotation(Command::class.java)
                 val Interface: onCommand = clazz.cast(clazz.newInstance())
                 this.commands[Annontation.name] = Pair(Annontation, Interface)
-                log("Found Command: ${Annontation.name} | ${Annontation.description}")
+                Logger.info("Found Command: ${Annontation.name} | ${Annontation.description}")
             }
         }
 

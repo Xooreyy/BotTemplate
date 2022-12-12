@@ -39,17 +39,13 @@ class Bot {
             .build()
             .awaitReady()
             .registerCommands()
-        log("Bot is ready! ${jda.selfUser.name} - ${jda.selfUser.id} on ${jda.guilds.size} guilds")
+        Logger.info("Bot is ready! ${jda.selfUser.name} - ${jda.selfUser.id} on ${jda.guilds.size} guilds")
 
         CommandHandler.registerMap()
         Database.connect()
 
         shutdown()
     }
-}
-
-fun log(message: String) {
-    println("[SYSTEM] $message")
 }
 
 fun main(args: Array<String>) {
@@ -61,7 +57,7 @@ fun shutdown() {
         val reader = BufferedReader(InputStreamReader(System.`in`))
         val input = reader.readLine()
         if (input == "shutdown") {
-            log("Shutting down...")
+            Logger.info("Shutting down...")
             Bot.instance.jda.shutdown()
             System.exit(0)
             break
