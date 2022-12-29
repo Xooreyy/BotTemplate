@@ -5,10 +5,10 @@ class Config {
         val config = this
 
         val loggingDisables: Boolean = true
-        val mongoUri: String = "mongodb+srv://Admin:xorey@main.efjiq4y.mongodb.net/test"
+        val mongoUri: String = "YOUR MONGOURI HERE"
         val mainPackage: String = "xyz.xorey"
-        val token: String = "OTQ0OTEzNDAxNTUxOTE3MDY2.G8e8XS.QpACEFLoY6E-DiKKBRvbvMU1wgsXZcoGrKRGHA"
+        val token: String = "YOUR TOKEN HERE"
         val botName: String =  "Bot"
-        val developers: List<String> = listOf("488737871747088384")
+        val developers: List<String> = listOf("YOUR ID HERE")
     }
 }
