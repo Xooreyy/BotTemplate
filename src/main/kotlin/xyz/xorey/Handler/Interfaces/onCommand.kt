@@ -1,3 +1,5 @@
+package xyz.xorey.Handler.Interfaces
+
 import net.dv8tion.jda.api.entities.Member
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.channel.concrete.Category

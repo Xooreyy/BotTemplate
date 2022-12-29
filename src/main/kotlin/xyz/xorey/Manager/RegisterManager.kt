@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.JDABuilder
 import net.dv8tion.jda.api.hooks.EventListener
 import net.dv8tion.jda.api.hooks.ListenerAdapter
 import net.dv8tion.jda.api.interactions.commands.build.Commands
-import onCommand
+import xyz.xorey.Handler.Interfaces.onCommand
 import org.reflections8.Reflections
 import kotlin.time.ExperimentalTime
 import kotlin.time.measureTime

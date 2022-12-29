@@ -20,10 +20,6 @@ class Guild {
             val doc = Document("guildId", guildId)
                 .append("guildName", Bot.instance.jda.getGuildById(guildId)?.name)
                 .append("prefix", "!")
-                .append("counterChannel", null)
-                .append("logWebhook", null)
-                .append("counter", 1)
-                .append("tempChannels", ArrayList<String>())
             coll.insertOne(doc)
         }
     }

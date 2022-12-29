@@ -1,6 +1,7 @@
 package xyz.xorey.Events
 
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent
+import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
@@ -22,6 +23,14 @@ class DatabaseListener : ListenerAdapter() {
         if (event.member?.user?.isBot == false) {
             Member.findOrCreateMember(event.member?.id!!, event.guild!!.id)
             User.findOrCreateUser(event.member?.id!!)
+        }
+    }
+
+    override fun onGuildMemberJoin(event: GuildMemberJoinEvent) {
+        Guild.findOrCreateGuild(event.guild.id)
+        if (!event.member.user.isBot) {
+            Member.findOrCreateMember(event.member.id, event.guild.id)
+            User.findOrCreateUser(event.member.id)
         }
     }
 

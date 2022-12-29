@@ -1,14 +1,17 @@
 package xyz.xorey.Handler.Command
 
+import com.mongodb.client.model.Aggregates
 import net.dv8tion.jda.api.Permission
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
-import onCommand
+import xyz.xorey.Handler.Interfaces.onCommand
+import org.bson.Document
 import org.reflections8.Reflections
 import xyz.xorey.Handler.Interfaces.Command
 import xyz.xorey.Manager.Bot
 import xyz.xorey.Manager.Config
 import xyz.xorey.Manager.Logger
+import xyz.xorey.db.Communication.Database
 import java.util.*
 import java.util.regex.Pattern
 
@@ -38,10 +41,14 @@ class CommandHandler {
         fun run(event: MessageReceivedEvent) {
             val message = event.message.contentRaw
 
-            if (!message.startsWith(Config.prefix, true)) {
+            val prefix = Database.mongoDB.getCollection("guild").aggregate(listOf(
+                Aggregates.match(Document("guildId", event.guild.id))
+            )).first()?.getString("prefix")
+
+            if (!message.startsWith(prefix!!, true)) {
                 return;
             }
-            val split: Array<String?> = message.replaceFirst(("(?i)" + Pattern.quote(Config.prefix)).toRegex(), "")
+            val split: Array<String?> = message.replaceFirst(("(?i)" + Pattern.quote(prefix)).toRegex(), "")
                 .split("\\s+".toRegex())
                 .dropLastWhile { it.isEmpty() }
                 .toTypedArray()

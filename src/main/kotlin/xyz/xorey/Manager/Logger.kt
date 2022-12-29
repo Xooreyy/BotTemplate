@@ -8,15 +8,15 @@ class Logger {
         private val logger = LoggerFactory.getILoggerFactory() as LoggerContext
         private val loggerClass = logger.getLogger("System")
 
-        const val ANSI_RESET = "[0m"
-        const val ANSI_BLACK = "[30m"
-        const val ANSI_RED = "[31m"
-        const val ANSI_GREEN = "[32m"
-        const val ANSI_YELLOW = "[33m"
-        const val ANSI_BLUE = "[34m"
-        const val ANSI_PURPLE = "[35m"
-        const val ANSI_CYAN = "[36m"
-        const val ANSI_WHITE = "[37m"
+        const val ANSI_RESET = "\u001B[0m"
+        const val ANSI_BLACK = "\u001B[30m"
+        const val ANSI_RED = "\u001B[31m"
+        const val ANSI_GREEN = "\u001B[32m"
+        const val ANSI_YELLOW = "\u001B[33m"
+        const val ANSI_BLUE = "\u001B[34m"
+        const val ANSI_PURPLE = "\u001B[35m"
+        const val ANSI_CYAN = "\u001B[36m"
+        const val ANSI_WHITE = "\u001B[37m"
 
         private fun log(level: String, message: String) {
             when (level) {

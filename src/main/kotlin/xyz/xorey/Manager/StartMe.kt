@@ -31,6 +31,9 @@ class Bot {
 
             val jdaLogger = LoggerFactory.getILoggerFactory() as LoggerContext
             jdaLogger.getLogger("net.dv8tion.jda").level = Level.ERROR
+
+            val reflectionLogger = LoggerFactory.getILoggerFactory() as LoggerContext
+            reflectionLogger.getLogger("org.reflections8").level = Level.ERROR
         }
 
         jda = JDABuilder.createDefault(Config.token)
@@ -43,7 +46,6 @@ class Bot {
 
         CommandHandler.registerMap()
         Database.connect()
-
         shutdown()
     }
 }
@@ -55,8 +57,9 @@ fun main(args: Array<String>) {
 fun shutdown() {
     while (true) {
         val reader = BufferedReader(InputStreamReader(System.`in`))
+        val stoppers = arrayOf("stop", "exit", "shutdown", "quit")
         val input = reader.readLine()
-        if (input == "shutdown") {
+        if (stoppers.contains(input.toLowerCase())) {
             Logger.info("Shutting down...")
             Bot.instance.jda.shutdown()
             System.exit(0)

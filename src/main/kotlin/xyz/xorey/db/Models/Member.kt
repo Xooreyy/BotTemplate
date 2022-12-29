@@ -19,7 +19,6 @@ class Member {
             }
             val doc = Document("memberId", memberId)
                 .append("memberGuild", Bot.instance.jda.getGuildById(guildId)?.id)
-                .append("Warns", HashMap<String, Pair<String, Int>>()) // <MemberId>, Pair<Reason, WarnId>
             coll.insertOne(doc)
         }
     }
